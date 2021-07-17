@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 import CourseGoalList from "./components/CourseGoalList/CourseGoalList";
+import CourseInput from "./components/CourseInput/CourseInput";
+
 import "./App.css";
 
 function App() {
@@ -8,6 +10,14 @@ function App() {
     { text: 'Do all exercises!', id: 'g1' },
     { text: 'Finish the course!', id: 'g2' }
   ])
+
+  const addGoalHandler = (goal) => {
+    setCourseGoals(prevGoals => {
+      const updatedGoals = [...prevGoals];
+      updatedGoals.unshift({text: goal, id: Math.random().toString()});
+      return updatedGoals;
+    })
+  }
 
   const deleteItemHandler = (goalId) => {
     setCourseGoals(prevGoals => {
@@ -27,7 +37,7 @@ function App() {
   return (
     <div>
       <section>
-        {/* goal input */}
+        <CourseInput onAddGoal={addGoalHandler}/>
       </section>
       <section id="goals">
         {content}
