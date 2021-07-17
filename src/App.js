@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import CourseGoalList from "./components/CourseGoalList/CourseGoalList";
+import "./App.css";
 
 function App() {
+  const [courseGoals, setCourseGoals] = useState([
+    { text: 'Do all exercises!', id: 'g1' },
+    { text: 'Finish the course!', id: 'g2' }
+  ])
+
+  const deleteItemHandler = (goalId) => {
+    setCourseGoals(prevGoals => {
+      let updatedGoals = prevGoals.filter(prevGoal => prevGoal.id !== goalId);
+      return updatedGoals;
+    })
+  }
+
+  let content = <p style={{ textAlign: 'center' }}>No goals found</p>
+
+  if(courseGoals.length) {
+    content = (
+      <CourseGoalList items={courseGoals} onDeleteItem={deleteItemHandler} />
+    )
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <section>
+        {/* goal input */}
+      </section>
+      <section id="goals">
+        {content}
+      </section>
     </div>
   );
 }
