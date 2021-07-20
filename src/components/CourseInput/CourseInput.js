@@ -19,7 +19,7 @@ const CourseInput = (props) => {
 
  	return (
 		<form onSubmit={formSubmitHandler}>
-			<div>
+			<div className="form-control">
 				<label htmlFor="course-goal">Course Goal</label>
 				<input type="text" value={enteredValue} onChange={goalInputChangeHandler} />
 			</div>
